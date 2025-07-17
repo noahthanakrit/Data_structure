@@ -16,11 +16,11 @@ int main()
         frequency[name]++;
     }
 
-    for (auto &[name, freq] : frequency)
+    for (auto &each : frequency)
     {
-        if (freq > 1)
+        if (each.second > 1)
         {
-            cout << name << " " << freq << endl;
+            cout << each.first << " " << each.second << endl;
         }
     }
     return 0;
