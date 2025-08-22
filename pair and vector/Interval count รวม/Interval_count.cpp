@@ -1,49 +1,41 @@
 #include <iostream>
+#include "set"
 #include "vector"
-
+#include "algorithm"
 using namespace std;
 
-void printVector(vector<int> &v)
-{
-    for (int e : v)
-    {
-        cout << e << " ";
-    }
-}
+set<int> all_nums_in_period;
 
 int main()
 {
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(0);
-    int n, m, k;
-    cin >> n >> m >> k;
+    int n, m;
+    cin >> n >> m;
 
-    vector<int> checked(n);
-    for (int i = 0; i < n; ++i)
+    for (size_t i = 0; i < n; i++)
     {
-        cin >> checked[i];
-    }
-
-    vector<int> determine(m);
-    for (int i = 0; i < m; ++i)
-    {
-        cin >> determine[i];
-    }
-
-    vector<int> counts_in_bound;
-
-    for (int each : determine)
-    {
-        int count = 0;
-        for (int check : checked)
+        int initial, final;
+        cin >> initial >> final;
+        for (size_t i = initial; i <= final; i++)
         {
-            if (each - k <= check && check <= each + k)
-            {
-                count++;
-            }
+            all_nums_in_period.insert(i);
         }
-        counts_in_bound.push_back(count);
     }
-    printVector(counts_in_bound);
+
+    while (m--)
+    {
+        int num;
+        cin >> num;
+        if (all_nums_in_period.find(num) != all_nums_in_period.end())
+        {
+            cout << 1 << " ";
+        }
+        else
+        {
+            cout << 0 << " ";
+        }
+    }
+
     return 0;
 }
